@@ -6,7 +6,7 @@
 /*   By: elima-me <elima-me@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 12:05:55 by elima-me          #+#    #+#             */
-/*   Updated: 2021/09/20 21:22:29 by elima-me         ###   ########.fr       */
+/*   Updated: 2021/09/20 21:30:44 by elima-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void handler(int sig)
 	static unsigned int	count;
 	static unsigned int letter;
 
-	ft_printf("count server == %d\n", count);
 	// ft_printf("letter == %d\n", letter);
 	if (count > 7)
 	{
@@ -27,10 +26,14 @@ void handler(int sig)
 	if (sig == SIGUSR2)
 	{
 		letter += 1 << count;
+		ft_printf("count server == %d\n", count);
 		// ft_printf("1\n");
 	}
 	if (sig == SIGUSR1)
+	{
+		ft_printf("count server == %d\n", count);
 		// ft_printf("0\n");
+	}
 	count++;
 	// if (count == 8)
 		// ft_printf("%d", letter);

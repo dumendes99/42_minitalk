@@ -6,11 +6,20 @@
 /*   By: elima-me <elima-me@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 12:50:02 by elima-me          #+#    #+#             */
-/*   Updated: 2021/09/20 21:55:57 by elima-me         ###   ########.fr       */
+/*   Updated: 2021/09/27 12:02:02 by elima-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minitalk.h>
+
+void handle_client(int sig)
+{
+	if (sig == SIGUSR2)
+	{
+		ft_printf("finished recieve signals\n");
+		exit(0);
+	}
+}
 
 void	get_char(int pid, unsigned char c)
 {
@@ -68,6 +77,7 @@ int	main(int argc, char *argv[])
 		get_char(pid, *argv[2]);
 		argv[2]++;
 	}
-	ft_printf("\n");
+	signal(SIGUSR2, handle_client);
+	get_char(pid, '\0');
 	return (1);
 }

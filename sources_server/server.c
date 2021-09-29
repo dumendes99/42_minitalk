@@ -6,7 +6,7 @@
 /*   By: elima-me <elima-me@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 12:05:55 by elima-me          #+#    #+#             */
-/*   Updated: 2021/09/27 11:58:29 by elima-me         ###   ########.fr       */
+/*   Updated: 2021/09/29 15:51:59 by elima-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	handler(int sig, siginfo_t *sa, void *context)
 			kill(sa->si_pid, SIGUSR2);
 		}
 		else
-			ft_printf("%c", letter);
+			write(1, &letter, 1);
 	}
 }
 
@@ -48,7 +48,7 @@ int	main(void)
 	sa.sa_sigaction = &handler;
 	sa.sa_flags = SA_SIGINFO;
 	pid = getpid();
-	ft_printf("process id: %d\n", pid);
+	printf("pid: %d\n", pid);
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
 	while (1)

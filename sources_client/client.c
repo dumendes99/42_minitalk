@@ -6,7 +6,7 @@
 /*   By: elima-me <elima-me@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 12:50:02 by elima-me          #+#    #+#             */
-/*   Updated: 2021/09/27 12:02:02 by elima-me         ###   ########.fr       */
+/*   Updated: 2021/09/29 15:53:11 by elima-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void handle_client(int sig)
 {
 	if (sig == SIGUSR2)
 	{
-		ft_printf("finished recieve signals\n");
+		write(1, "finished recieve signals\n", 26);
 		exit(0);
 	}
 }
@@ -31,12 +31,12 @@ void	get_char(int pid, unsigned char c)
 		if (c % 2 == 0 || c == 0)
 		{
 			kill(pid, SIGUSR1);
-			usleep(500);
+			usleep(1100);
 		}
 		else
 		{
 			kill(pid, SIGUSR2);
-			usleep(500);
+			usleep(1100);
 		}
 		c /= 2;
 		count++;
@@ -65,13 +65,12 @@ int	main(int argc, char *argv[])
 
 	if (argc != 3)
 	{
-		ft_printf("Please inform PID, and the string wich you want send!\n");
+		write(1, "Please inform PID, and the string wich you want send!\n", 55);
 		return (0);
 	}
 	pid = get_id(argv[1]);
-	ft_printf("%d\n", pid);
 	if (!pid)
-		ft_printf("Please inform a correct PID!!\n");
+		write(1, "Please inform a correct PID!!\n", 31);
 	while (*argv[2])
 	{
 		get_char(pid, *argv[2]);
